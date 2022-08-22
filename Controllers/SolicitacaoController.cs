@@ -200,8 +200,8 @@ public class SolicitacaoController : ControllerBase
     private async void GravaKafka(string mensagem)
     {
 
-        string bootstrapServers = "kafka:9092";
-        string nomeTopic = "topico-danilo";
+        string bootstrapServers = _config.GetSection("AppSettings")["KafkaServer"]; // "kafka:9092";
+        string nomeTopic = _config.GetSection("AppSettings")["KafkaTopic"]; //"topico-danilo";
 
         using var activity = source.StartActivity("Produzindo Mensagem Kafka");
         activity?.SetTag("Tópico", nomeTopic);
